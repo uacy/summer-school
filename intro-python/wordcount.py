@@ -39,6 +39,30 @@ print_words() and print_top().
 
 import sys
 
+def print_words(filename):
+	dict = {}
+	fid = open(filename,"r")
+#	import pdb; pdb.set_trace()
+	for line in fid:
+		words = line.split()
+		for i in range(len(words)):
+			words[i] = words[i].lower()
+			if words[i] in dict: 
+				dict[words[i]] += 1
+			else:
+				dict[words[i]] = 1
+	for key in sorted(dict):
+		print "%s %s" % (key, dict[key])
+		
+	return 
+
+def print_top(filename):\
+	import operator
+	dict = print_words(filename)
+	sorted_dict = sorted(dict.iteritems(), key=operator.itemgetter(1))
+	for i in range(20):
+		print dict
+	return
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
